@@ -5,7 +5,7 @@
 #include "system.h"
 
 /*函数声明部分*/
-
+void Menu_Adc1_Page(void);
 
 
 #endif

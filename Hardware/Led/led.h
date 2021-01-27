@@ -6,12 +6,12 @@
 
 /*宏定义部分*/
 //LED状态 低电平有效
-#define Led_Turn_Off	1
 #define Led_Turn_On		0
-#define Led_Flash			3
+#define Led_Turn_Off	1
+#define Led_Flash			2
 //LED端口定义
-#define Led_0 PBout(12)
-#define Led_1 PBout(13)
+#define Led_0 PBout(13)
+#define Led_1 PBout(12)
 
 /*函数声明部分*/
 void Led_Init(void);

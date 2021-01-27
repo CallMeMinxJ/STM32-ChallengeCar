@@ -10,6 +10,7 @@
 #include "control.h"
 #include "key.h"
 #include "oled.h"
+#include "menu.h"
 
 /**
  * @brief		程序主函数
@@ -23,16 +24,12 @@ int main (void)
 	Nvic_Init();//中断配置
 	JTAGDisable();//禁用Jtag
 	Car_Init();//车辆初始化
-	
-	OLED_ShowString(5,5,"OK",12);
-	OLED_Refresh_Gram();
 
-	
 	while(1)
 	{
 		//按键检测功能实现
 		Key_Function(Key_Scan(Mode_Ucnt));
-
+		Menu_Adc1_Page();
 	}
 }
 

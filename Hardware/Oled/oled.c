@@ -3,13 +3,15 @@
  * @author	武术擂台车小组
  * @version v0.0.0
  * @date		2021/01/23
+ * @attention
+ *					该文件使用了数字转字符串函数，函数本体在system.c中
  */
  
 /*头文件部分*/
+#include "stdlib.h"
+#include <math.h>
 #include "system.h"
 #include "oled.h"
-#include <math.h>
-#include <stdlib.h> 
 #include "oledfont.h"
 
 /*全局变量部分*/
@@ -226,6 +228,25 @@ void OLED_ShowString(uint8_t x,uint8_t y,const uint8_t *p,uint8_t size)
         x+=size/2;
         p++;
     }  
+}
+
+/**
+ * @brief		功能：在固定位置显示数字
+ * @param		x:横坐标 y：纵坐标 p：需要显示的字符串 size:字号 12/16/32
+ * @return	无
+ */
+void OLED_ShowNumber(uint8_t x,uint8_t y,int32_t number,uint8_t size)
+{	
+	char *p;
+	p = Num_To_String(number,p,10);
+	while((*p<='9')&&(*p>='0'))//判断是不是非法字符
+	{       
+			if(x>(128-(size/2))){x=0;y+=size;}
+			if(y>(64-size)){y=x=0;OLED_Clear(1);}
+			OLED_ShowChar(x,y,*p,size,1);	 
+			x+=size/2;
+			p++;
+	}  
 }
 
 /**

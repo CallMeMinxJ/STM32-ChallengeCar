@@ -1,6 +1,8 @@
 /**
  * @brief		系统TIM时钟相关函数
  * @author	武术擂台车小组
+ * @global	bool Led_0_Flash_Door - 控制Led_0闪烁
+ *					bool Led_1_Flash_Door - 控制Led_1闪烁
  * @version v0.0.0
  * @date		2021/01/25
  */
@@ -8,6 +10,11 @@
 /*头文件部分*/
 #include "system.h"
 #include "timer.h"
+#include "led.h"
+
+/*全局变量部分*/
+extern bool Led_0_Flash_Door;
+extern bool Led_1_Flash_Door;
 
 /**
  * @brief		时钟3初始化函数
@@ -38,9 +45,26 @@ void TIM3_Init(uint16_t ARR,uint16_t PSC)
  */
 void TIM3_IRQHandler(void)
 {
+	static uint16_t Led_Flash_Time_ms = 0;
+	
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)  //检查TIM3更新中断发生与否
 	{
 		TIM_ClearITPendingBit(TIM3, TIM_IT_Update  );  //清除TIMx更新中断标志 
+		
+		//Led闪烁控制
+		if (Led_0_Flash_Door || Led_1_Flash_Door)
+		{
+			//flash 周期 500ms
+			if(Led_Flash_Time_ms<500)Led_Flash_Time_ms++;
+			else 
+			{
+				Led_Flash_Time_ms=0;
+				
+				//Led翻转
+				if(Led_0_Flash_Door)Led_0 = !Led_0;
+				if(Led_1_Flash_Door)Led_1 = !Led_1;
+			}
+		}
 	}
 }
 

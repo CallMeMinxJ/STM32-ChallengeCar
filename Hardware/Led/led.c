@@ -1,6 +1,8 @@
 /**
  * @brief		核心板上LED相关函数
  * @author	武术擂台车小组
+ * @global	bool Led_0_Flash_Door - 控制Led_0闪烁
+ *					bool Led_1_Flash_Door - 控制Led_1闪烁
  * @version v0.0.0
  * @date		2021/01/24
  */
@@ -8,6 +10,10 @@
 /*头文件部分*/
 #include "system.h"
 #include "led.h"
+
+/*全局变量部分*/
+bool Led_0_Flash_Door = false;
+bool Led_1_Flash_Door = false;
 
 /**
  * @brief		LED初始化函数
@@ -40,37 +46,24 @@ void Led_Init(void)
  * @param		uint8_t Led_0_Mode
  *						Led_Turn_On		-	0	常亮
  *						Led_Turn_Off	-	1	常灭
- *						Led_Flash			-	3	闪烁
+ *						Led_Flash			-	2	闪烁
  * @return	无
  */
 void Led_Display(uint8_t Led_0_Mode,uint8_t Led_1_Mode)
 {
+	//点亮和熄灭
+	if 			(Led_0_Mode == Led_Turn_On)		Led_0 = Led_Turn_On;
+	else if (Led_0_Mode == Led_Turn_Off)	Led_0 = Led_Turn_Off;
+	if 			(Led_1_Mode == Led_Turn_On)		Led_1 = Led_Turn_On;
+	else if (Led_1_Mode == Led_Turn_Off)	Led_1 = Led_Turn_Off;
 	
-	//LED_0
-	switch(Led_0_Mode)
-	{
-		case Led_Turn_On	:Led_0 = Led_Turn_On;	break;
-		case Led_Turn_Off	:Led_0 = Led_Turn_Off;	break;
-		case Led_Flash	:
-		{
-
-			break;
-		}
-	}
-	
-	//LED_1
-	switch(Led_1_Mode)
-	{
-		case Led_Turn_On	:Led_1 = Led_Turn_On;	break;
-		case Led_Turn_Off	:Led_1 = Led_Turn_Off;	break;
-		case Led_Flash	:
-		{
-
-			break;
-		}
-	}
+	//LED闪烁
+	if (Led_0_Mode == Led_Flash)Led_0_Flash_Door = true;
+	else	Led_0_Flash_Door = false;
+	if (Led_1_Mode == Led_Flash)Led_1_Flash_Door = true;
+	else	Led_1_Flash_Door = false;
 }
- 
+
  
 
 

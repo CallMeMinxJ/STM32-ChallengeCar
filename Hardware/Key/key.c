@@ -99,7 +99,7 @@ void Key_Function(uint8_t Key_Num)
 		
 		case Key_2_Num:
 		{
-			Led_Display(Led_Flash,Led_Flash);
+			Led_Display(Led_Flash,Led_Turn_Off);
 			break;
 		}
 	}

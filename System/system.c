@@ -44,6 +44,49 @@ void JTAGDisable(void)
 }
 
 /**
+ * @brief		将数字转换成字符串
+ * @param		int num		- 需要转换的数字
+ *					int radix	- 转换基数
+ * @return	无
+ */
+char* Num_To_String(int num,char* str,int radix)
+{
+	char index[]="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";//索引表
+	unsigned unum;
+	int i=0,j,k;
+	char temp;
+
+	//获取要转换的整数的绝对值
+	if(radix==10&&num<0)
+	{
+		unum=(unsigned)-num;
+		str[i++]='-';
+	}
+	else unum=(unsigned)num;
+	//转换部分，注意转换后是逆序的
+	do
+	{
+		str[i++]=index[unum%(unsigned)radix];
+		unum/=radix;
+
+	}while(unum);
+	str[i]='\0';
+	//将顺序调整过来
+	if(str[0]=='-') k=1;
+	else k=0;
+	
+	for(j=k;j<=(i-1)/2;j++)
+	{
+		temp=str[j];
+		str[j]=str[i-1+k-j];
+		str[i-1+k-j]=temp;
+	}
+
+	return str;//返回转换后的字符串
+}
+
+
+/**
  * @brirf		以下代码用于实现精准延迟固定时间
  *
  * 该部分代码来自正点原子

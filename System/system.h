@@ -12,6 +12,8 @@
 #define int8_t		signed char
 #define int16_t		signed short
 #define int32_t		signed int
+//布尔类型定义
+typedef enum {false = 0,true = 1} bool;
 //IO口操作宏定义
 #define BITBAND(addr, bitnum) ((addr & 0xF0000000)+0x2000000+((addr &0xFFFFF)<<5)+(bitnum<<2)) 
 #define MEM_ADDR(addr)  *((volatile unsigned long  *)(addr)) 
@@ -50,6 +52,7 @@
 /*函数声明部分*/
 void Nvic_Init(void);
 void JTAGDisable(void);
+char* Num_To_String(int num,char* str,int radix);
 void Delay_Init(void);
 void Delay_ms(u16 nms);
 void Delay_us(u32 nus);

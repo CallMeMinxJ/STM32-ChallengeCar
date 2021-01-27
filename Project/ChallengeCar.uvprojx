@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\User;..\Library\Core;..\Library\Inc;..\System;..\Hardware\Adc;..\Hardware\Key;..\Hardware\Led;..\Hardware\Oled;..\Hardware\Timer;..\Control</IncludePath>
+              <IncludePath>..\User;..\Library\Core;..\Library\Inc;..\System;..\Hardware\Adc;..\Hardware\Key;..\Hardware\Led;..\Hardware\Oled;..\Hardware\Timer;..\Control;..\Hardware\Dma</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -577,6 +577,11 @@
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\Timer\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\Dma\dma.c</FilePath>
             </File>
           </Files>
         </Group>
